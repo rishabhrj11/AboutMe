@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function getDetails() {
+        $.ajax({
+            type: "Get",
+            contentType: "application/json;",
+            url: "http://localhost:62236/About/GetDetails",
+            dataType: "JSON",
+            async: true,
+
+            success: function (response) {
+                $(".mainDiv .data-text #Name").html("Name : " + response.Name);
+                $(".mainDiv .data-text #Age").html("Age : " + response.age);
+                $(".mainDiv .data-text #Designation").html("Designation : " + response.aboutme);
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    }
+</script>
+<div class="mainDiv">
+    <div>
+        <input type="button" value="About Me" onclick="getDetails()" /> 
+    </div>
+    <div class="data-text">
+        <div id="Name"></div>
+    </div>
+    <div class="data-text">
+        <div id="Age"></div>
+    </div>
+    <div class="data-text">
+        <div id="Designation"></div>
+    </div>
+</div>
